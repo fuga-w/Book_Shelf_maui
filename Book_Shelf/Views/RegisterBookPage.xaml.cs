@@ -64,7 +64,7 @@ namespace Book_Shelf.Views
         {
             await _viewModel.RegisterBook(new ManagedBook
             {
-                Title = book?.Title,
+                Title = _viewModel.SearchedBookTitle,
                 Author = book?.Author,
                 CoverImage = book?.CoverImage,
                 Isbn = book?.Isbn,
