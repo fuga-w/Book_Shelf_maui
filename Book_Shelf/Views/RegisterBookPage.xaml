@@ -57,7 +57,7 @@
                                           WidthRequest="120"
                                           HeightRequest="180"
                                           Aspect="AspectFill"
-                                          Source="placeholder.png"/>
+                                          Source="{Binding SearchedBookCoverImage}"/>
 
                                    <!-- 書名 -->
                                    <Label x:Name="TitleLabel"

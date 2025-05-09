@@ -41,11 +41,7 @@ namespace Book_Shelf.Views
             // 表示更新
             _viewModel.SearchedBookTitle = book.Title;
             _viewModel.SearchedBookAuthor = book.Author;
-            AuthorLabel.Text = book.Author;
-            CoverImage.Source = string.IsNullOrEmpty(book.CoverImage)
-                ? "placeholder.png"
-                : book.CoverImage;
-
+            _viewModel.SearchedBookCoverImage = book.CoverImage;
             ResultCard.IsVisible = true;
         }
 
@@ -67,7 +63,7 @@ namespace Book_Shelf.Views
             {
                 Title = _viewModel.SearchedBookTitle,
                 Author = _viewModel.SearchedBookAuthor,
-                CoverImage = book?.CoverImage,
+                CoverImage = _viewModel.SearchedBookCoverImage,
                 Isbn = book?.Isbn,
             });
 

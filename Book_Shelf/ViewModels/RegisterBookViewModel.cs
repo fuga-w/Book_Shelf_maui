@@ -9,6 +9,7 @@ public class RegisterBookPageViewModel : ObservableObject
     private ManagedBookRepository _managedBookRepository;
     private string _searchedBookTitle = string.Empty;
     private string _searchedBookAuthor = string.Empty;
+    private string _searchedBookCoverImage = string.Empty;
 
     public string SearchedBookTitle
     {
@@ -26,6 +27,16 @@ public class RegisterBookPageViewModel : ObservableObject
         set
         {
             _searchedBookAuthor = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string SearchedBookCoverImage
+    {
+        get => _searchedBookCoverImage;
+        set
+        {
+            _searchedBookCoverImage = value;
             OnPropertyChanged();
         }
     }
