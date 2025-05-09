@@ -41,7 +41,7 @@
 
                      <!-- 検索結果表示エリア -->
                      <Border x:Name="ResultCard"
-                             IsVisible="False"
+                             IsVisible="{Binding InDisplaySearchResult}"
                              Stroke="#cccccc"
                              StrokeThickness="1"
                              StrokeShape="RoundRectangle 10"

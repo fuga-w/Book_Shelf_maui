@@ -42,14 +42,14 @@ namespace Book_Shelf.Views
             _viewModel.SearchedBookTitle = book.Title;
             _viewModel.SearchedBookAuthor = book.Author;
             _viewModel.SearchedBookCoverImage = book.CoverImage;
-            ResultCard.IsVisible = true;
+            _viewModel.InDisplaySearchResult = true;
         }
 
         private void OnIsbinChanged(object sender, TextChangedEventArgs e)
         {
             IsbinBorder.Stroke = Colors.Gray;
             ErrorLabel.IsVisible = false;
-            ResultCard.IsVisible = false;
+            _viewModel.InDisplaySearchResult = false;
         }
 
         private bool IsValidIsbin(string isbin)
