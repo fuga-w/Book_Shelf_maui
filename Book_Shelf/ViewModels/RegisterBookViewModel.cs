@@ -8,6 +8,7 @@ public class RegisterBookPageViewModel : ObservableObject
     private OpenDbService _openDbService;
     private ManagedBookRepository _managedBookRepository;
     private string _searchedBookTitle = string.Empty;
+    private string _searchedBookAuthor = string.Empty;
 
     public string SearchedBookTitle
     {
@@ -15,6 +16,16 @@ public class RegisterBookPageViewModel : ObservableObject
         set
         {
             _searchedBookTitle = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string SearchedBookAuthor
+    {
+        get => _searchedBookAuthor;
+        set
+        {
+            _searchedBookAuthor = value;
             OnPropertyChanged();
         }
     }

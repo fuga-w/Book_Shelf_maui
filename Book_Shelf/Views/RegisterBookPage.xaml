@@ -68,7 +68,7 @@
 
                                    <!-- 著者 -->
                                    <Label x:Name="AuthorLabel"
-                                          Text="著者名"
+                                          Text="{Binding SearchedBookAuthor}"
                                           FontSize="16"
                                           TextColor="Gray"
                                           HorizontalTextAlignment="Center"/>

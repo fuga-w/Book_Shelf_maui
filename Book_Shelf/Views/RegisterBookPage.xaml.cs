@@ -40,6 +40,7 @@ namespace Book_Shelf.Views
 
             // 表示更新
             _viewModel.SearchedBookTitle = book.Title;
+            _viewModel.SearchedBookAuthor = book.Author;
             AuthorLabel.Text = book.Author;
             CoverImage.Source = string.IsNullOrEmpty(book.CoverImage)
                 ? "placeholder.png"
@@ -65,7 +66,7 @@ namespace Book_Shelf.Views
             await _viewModel.RegisterBook(new ManagedBook
             {
                 Title = _viewModel.SearchedBookTitle,
-                Author = book?.Author,
+                Author = _viewModel.SearchedBookAuthor,
                 CoverImage = book?.CoverImage,
                 Isbn = book?.Isbn,
             });
