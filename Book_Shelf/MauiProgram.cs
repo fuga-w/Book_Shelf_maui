@@ -22,6 +22,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<IManagedBookService, DummyManagedBookService>();
 		builder.Services.AddSingleton<ManagedBookRepository>();
 		builder.Services.AddTransient<ManagedBooksViewModel>();
+		builder.Services.AddTransient<RegisterBookPageViewModel>();
 
 #if DEBUG
 		builder.Logging.AddDebug();

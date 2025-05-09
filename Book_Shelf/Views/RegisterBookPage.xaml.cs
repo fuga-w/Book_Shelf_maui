@@ -2,18 +2,19 @@
 using Book_Shelf.Services;
 using Book_Shelf.Models;
 using Book_Shelf.Repositories;
+using Book_Shelf.ViewModels;
 namespace Book_Shelf.Views
 {
     public partial class RegisterBookPage : ContentPage
     {
-        private OpenDbService _openDbService;
         private ManagedBookRepository _managedBookRepository;
         private SearchedBook? book = null;
-        public RegisterBookPage(OpenDbService openDbService, ManagedBookRepository managedBookRepository)
+        private RegisterBookPageViewModel _viewModel;
+        public RegisterBookPage(ManagedBookRepository managedBookRepository, RegisterBookPageViewModel viewModel)
         {
             InitializeComponent();
-            _openDbService = openDbService;
             _managedBookRepository = managedBookRepository;
+            _viewModel = viewModel;
         }
         private async void OnSearchClicked(object sender, EventArgs e)
         {
@@ -31,7 +32,7 @@ namespace Book_Shelf.Views
             IsbinBorder.Stroke = Colors.Gray;
             ErrorLabel.IsVisible = false;
 
-            book = await LookupBookByIsbin(isbin);
+            book = await _viewModel.LookupBookByIsbin(isbin);
 
             if (book == null)
             {
@@ -48,13 +49,6 @@ namespace Book_Shelf.Views
                 : book.CoverImage;
 
             ResultCard.IsVisible = true;
-        }
-
-        private async Task<SearchedBook?> LookupBookByIsbin(string isbin)
-        {
-            var result = await _openDbService.SearchBooks(isbin);
-
-            return result == null ? null : result.FirstOrDefault();
         }
 
         private bool IsValidIsbin(string isbin)
