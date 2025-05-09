@@ -1,11 +1,23 @@
 using Book_Shelf.Services;
 using Book_Shelf.Models;
 using Book_Shelf.Repositories;
+using CommunityToolkit.Mvvm.ComponentModel;
 namespace Book_Shelf.ViewModels;
-public class RegisterBookPageViewModel
+public class RegisterBookPageViewModel : ObservableObject
 {
     private OpenDbService _openDbService;
     private ManagedBookRepository _managedBookRepository;
+    private string _searchedBookTitle = string.Empty;
+
+    public string SearchedBookTitle
+    {
+        get => _searchedBookTitle;
+        set
+        {
+            _searchedBookTitle = value;
+            OnPropertyChanged();
+        }
+    }
 
     public RegisterBookPageViewModel(OpenDbService openDbService, ManagedBookRepository managedBookRepository)
     {

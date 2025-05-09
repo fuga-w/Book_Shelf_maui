@@ -1,9 +1,6 @@
 ﻿using System.Text.RegularExpressions;
-using Book_Shelf.Services;
 using Book_Shelf.Models;
-using Book_Shelf.Repositories;
 using Book_Shelf.ViewModels;
-using System.Threading.Tasks;
 namespace Book_Shelf.Views
 {
     public partial class RegisterBookPage : ContentPage
@@ -42,7 +39,7 @@ namespace Book_Shelf.Views
             }
 
             // 表示更新
-            TitleLabel.Text = book.Title;
+            _viewModel.SearchedBookTitle = book.Title;
             AuthorLabel.Text = book.Author;
             CoverImage.Source = string.IsNullOrEmpty(book.CoverImage)
                 ? "placeholder.png"
@@ -51,16 +48,16 @@ namespace Book_Shelf.Views
             ResultCard.IsVisible = true;
         }
 
-        private bool IsValidIsbin(string isbin)
-        {
-            return Regex.IsMatch(isbin, @"^\d{13}$");
-        }
-
         private void OnIsbinChanged(object sender, TextChangedEventArgs e)
         {
             IsbinBorder.Stroke = Colors.Gray;
             ErrorLabel.IsVisible = false;
             ResultCard.IsVisible = false;
+        }
+
+        private bool IsValidIsbin(string isbin)
+        {
+            return Regex.IsMatch(isbin, @"^\d{13}$");
         }
 
         private async void OnRegisterClicked(object sender, EventArgs e)

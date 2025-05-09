@@ -1,90 +1,90 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
-    x:Class="Book_Shelf.Views.RegisterBookPage"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:local="clr-namespace:Book_Shelf.Views"
-    mc:Ignorable="d">
-    <ScrollView>
-        <VerticalStackLayout Padding="20"
-                             Spacing="15">
+       x:Class="Book_Shelf.Views.RegisterBookPage"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
+       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+       xmlns:local="clr-namespace:Book_Shelf.Views"
+       mc:Ignorable="d">
+       <ScrollView>
+              <VerticalStackLayout Padding="20"
+                                   Spacing="15">
 
-            <Label Text="ISBINを入力してください:"
-                   FontSize="18"/>
+                     <Label Text="ISBINを入力してください:"
+                            FontSize="18"/>
 
-            <!-- ISBIN 入力 -->
-            <Border x:Name="IsbinBorder"
-                    Stroke="Gray"
-                    StrokeThickness="1"
-                    StrokeShape="RoundRectangle 6"
-                    Padding="5">
-                <Entry x:Name="IsbinEntry"
-                       Placeholder="例: 9781234567890"
-                       Keyboard="Numeric"
-                       TextChanged="OnIsbinChanged"/>
-            </Border>
+                     <!-- ISBIN 入力 -->
+                     <Border x:Name="IsbinBorder"
+                             Stroke="Gray"
+                             StrokeThickness="1"
+                             StrokeShape="RoundRectangle 6"
+                             Padding="5">
+                            <Entry x:Name="IsbinEntry"
+                                   Placeholder="例: 9781234567890"
+                                   Keyboard="Numeric"
+                                   TextChanged="OnIsbinChanged"/>
+                     </Border>
 
-            <Label x:Name="ErrorLabel"
-                   Text=""
-                   TextColor="Red"
-                   IsVisible="False"
-                   FontSize="14"/>
+                     <Label x:Name="ErrorLabel"
+                            Text=""
+                            TextColor="Red"
+                            IsVisible="False"
+                            FontSize="14"/>
 
-            <Button Text="検索"
-                    Clicked="OnSearchClicked"
-                    FontSize="18"
-                    BackgroundColor="#007AFF"
-                    TextColor="White"
-                    CornerRadius="6"/>
+                     <Button Text="検索"
+                             Clicked="OnSearchClicked"
+                             FontSize="18"
+                             BackgroundColor="#007AFF"
+                             TextColor="White"
+                             CornerRadius="6"/>
 
-            <!-- 検索結果表示エリア -->
-            <Border x:Name="ResultCard"
-                    IsVisible="False"
-                    Stroke="#cccccc"
-                    StrokeThickness="1"
-                    StrokeShape="RoundRectangle 10"
-                    BackgroundColor="#f9f9f9"
-                    Padding="15"
-                    Margin="0,20,0,0">
+                     <!-- 検索結果表示エリア -->
+                     <Border x:Name="ResultCard"
+                             IsVisible="False"
+                             Stroke="#cccccc"
+                             StrokeThickness="1"
+                             StrokeShape="RoundRectangle 10"
+                             BackgroundColor="#f9f9f9"
+                             Padding="15"
+                             Margin="0,20,0,0">
 
-                <VerticalStackLayout HorizontalOptions="Center"
-                                     Spacing="10">
+                            <VerticalStackLayout HorizontalOptions="Center"
+                                                 Spacing="10">
 
-                    <!-- 書影 -->
-                    <Image x:Name="CoverImage"
-                           WidthRequest="120"
-                           HeightRequest="180"
-                           Aspect="AspectFill"
-                           Source="placeholder.png"/>
+                                   <!-- 書影 -->
+                                   <Image x:Name="CoverImage"
+                                          WidthRequest="120"
+                                          HeightRequest="180"
+                                          Aspect="AspectFill"
+                                          Source="placeholder.png"/>
 
-                    <!-- 書名 -->
-                    <Label x:Name="TitleLabel"
-                           Text="書名"
-                           FontSize="20"
-                           FontAttributes="Bold"
-                           HorizontalTextAlignment="Center"/>
+                                   <!-- 書名 -->
+                                   <Label x:Name="TitleLabel"
+                                          Text="{Binding SearchedBookTitle}"
+                                          FontSize="20"
+                                          FontAttributes="Bold"
+                                          HorizontalTextAlignment="Center"/>
 
-                    <!-- 著者 -->
-                    <Label x:Name="AuthorLabel"
-                           Text="著者名"
-                           FontSize="16"
-                           TextColor="Gray"
-                           HorizontalTextAlignment="Center"/>
+                                   <!-- 著者 -->
+                                   <Label x:Name="AuthorLabel"
+                                          Text="著者名"
+                                          FontSize="16"
+                                          TextColor="Gray"
+                                          HorizontalTextAlignment="Center"/>
 
-                    <Button Text="この書籍を登録"
-                            Clicked="OnRegisterClicked"
-                            FontSize="16"
-                            BackgroundColor="#007AFF"
-                            TextColor="White"
-                            CornerRadius="6"
-                            WidthRequest="200"
-                            Margin="0,10,0,0"/>
+                                   <Button Text="この書籍を登録"
+                                           Clicked="OnRegisterClicked"
+                                           FontSize="16"
+                                           BackgroundColor="#007AFF"
+                                           TextColor="White"
+                                           CornerRadius="6"
+                                           WidthRequest="200"
+                                           Margin="0,10,0,0"/>
 
-                </VerticalStackLayout>
-            </Border>
+                            </VerticalStackLayout>
+                     </Border>
 
-        </VerticalStackLayout>
-    </ScrollView>
+              </VerticalStackLayout>
+       </ScrollView>
 </ContentPage>
