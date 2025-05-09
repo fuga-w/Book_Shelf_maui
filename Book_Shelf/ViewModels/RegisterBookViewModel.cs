@@ -18,4 +18,9 @@ public class RegisterBookPageViewModel
         var result = await _openDbService.SearchBooks(isbin);
         return result == null ? null : result.FirstOrDefault();
     }
+
+    public async Task RegisterBook(ManagedBook book)
+    {
+        await _managedBookRepository.AddBook(book);
+    }
 }

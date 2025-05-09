@@ -3,18 +3,18 @@ using Book_Shelf.Services;
 using Book_Shelf.Models;
 using Book_Shelf.Repositories;
 using Book_Shelf.ViewModels;
+using System.Threading.Tasks;
 namespace Book_Shelf.Views
 {
     public partial class RegisterBookPage : ContentPage
     {
-        private ManagedBookRepository _managedBookRepository;
         private SearchedBook? book = null;
         private RegisterBookPageViewModel _viewModel;
-        public RegisterBookPage(ManagedBookRepository managedBookRepository, RegisterBookPageViewModel viewModel)
+        public RegisterBookPage(RegisterBookPageViewModel viewModel)
         {
             InitializeComponent();
-            _managedBookRepository = managedBookRepository;
             _viewModel = viewModel;
+            BindingContext = _viewModel;
         }
         private async void OnSearchClicked(object sender, EventArgs e)
         {
@@ -63,9 +63,9 @@ namespace Book_Shelf.Views
             ResultCard.IsVisible = false;
         }
 
-        private void OnRegisterClicked(object sender, EventArgs e)
+        private async void OnRegisterClicked(object sender, EventArgs e)
         {
-            _managedBookRepository.AddBook(new ManagedBook
+            await _viewModel.RegisterBook(new ManagedBook
             {
                 Title = book?.Title,
                 Author = book?.Author,
@@ -73,7 +73,6 @@ namespace Book_Shelf.Views
                 Isbn = book?.Isbn,
             });
 
-            // TODO: 実際の登録処理（DB保存など）をここに実装
             // ここでは例としてメッセージ表示
             DisplayAlert("登録完了", $"「{book.Title}」を登録しました。", "OK");
 

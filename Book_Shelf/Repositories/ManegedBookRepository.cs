@@ -19,7 +19,7 @@ public class ManagedBookRepository
         return await _managedBookService.GetAllBooks();
     }
 
-    public async void AddBook(ManagedBook book)
+    public async Task AddBook(ManagedBook book)
     {
         await _managedBookService.AddBook(book);
     }
