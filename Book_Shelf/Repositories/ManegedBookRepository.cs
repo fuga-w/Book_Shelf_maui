@@ -5,6 +5,7 @@ public interface IManagedBookService
 {
     Task<List<ManagedBook>> GetAllBooks();
     Task AddBook(ManagedBook book);
+    Task RemoveBook(ManagedBook book);
 }
 public class ManagedBookRepository
 {
@@ -22,5 +23,10 @@ public class ManagedBookRepository
     public async Task AddBook(ManagedBook book)
     {
         await _managedBookService.AddBook(book);
+    }
+
+    public async Task RemoveBook(ManagedBook book)
+    {
+        await _managedBookService.RemoveBook(book);
     }
 }

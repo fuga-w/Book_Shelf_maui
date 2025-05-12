@@ -18,4 +18,10 @@ internal class DummyManagedBookService : IManagedBookService
         _books.Add(book);
         return Task.CompletedTask;
     }
+
+    public Task RemoveBook(ManagedBook book)
+    {
+        _books.RemoveAll(b => b.Isbn == book.Isbn);
+        return Task.CompletedTask;
+    }
 }

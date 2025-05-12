@@ -12,6 +12,7 @@ public class RegisterBookPageViewModel : ObservableObject
     private string _searchedBookCoverImage = string.Empty;
     private bool _inDisplaySearchResult = false;
     private string _isbin = string.Empty;
+    private bool _isBookRegistered = false;
 
     public string SearchedBookTitle
     {
@@ -63,6 +64,16 @@ public class RegisterBookPageViewModel : ObservableObject
         }
     }
 
+    public bool IsBookRegistered
+    {
+        get => _isBookRegistered;
+        set
+        {
+            _isBookRegistered = value;
+            OnPropertyChanged();
+        }
+    }
+
     public RegisterBookPageViewModel(OpenDbService openDbService, ManagedBookRepository managedBookRepository)
     {
         _openDbService = openDbService;
@@ -78,5 +89,22 @@ public class RegisterBookPageViewModel : ObservableObject
     public async Task RegisterBook(ManagedBook book)
     {
         await _managedBookRepository.AddBook(book);
+    }
+
+    public async Task CheckBookRegistered(string isbn)
+    {
+        var books = await _managedBookRepository.GetAllBooks();
+        IsBookRegistered = books.Any(b => b.Isbn == isbn);
+    }
+
+    public async Task UnregisterBook(string isbn)
+    {
+        var books = await _managedBookRepository.GetAllBooks();
+        var book = books.FirstOrDefault(b => b.Isbn == isbn);
+        if (book != null)
+        {
+            await _managedBookRepository.RemoveBook(book);
+        }
+        IsBookRegistered = false;
     }
 }

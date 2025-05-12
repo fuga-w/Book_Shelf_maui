@@ -81,8 +81,18 @@
                                            TextColor="White"
                                            CornerRadius="6"
                                            WidthRequest="200"
-                                           Margin="0,10,0,0"/>
+                                           Margin="0,10,0,0"
+                                           IsVisible="{Binding IsBookRegistered, Converter={StaticResource InverseBoolConverter}}"/>
 
+                                   <Button Text="登録解除"
+                                           Clicked="OnUnregisterClicked"
+                                           FontSize="16"
+                                           BackgroundColor="#FF3B30"
+                                           TextColor="White"
+                                           CornerRadius="6"
+                                           WidthRequest="200"
+                                           Margin="0,10,0,0"
+                                           IsVisible="{Binding IsBookRegistered}"/>
                             </VerticalStackLayout>
                      </Border>
 

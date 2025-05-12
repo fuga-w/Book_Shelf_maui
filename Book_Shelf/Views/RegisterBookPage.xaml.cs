@@ -49,6 +49,9 @@ namespace Book_Shelf.Views
                 return;
             }
 
+            // 書籍が登録済みかどうかをチェック
+            await _viewModel.CheckBookRegistered(isbinValue);
+
             // 表示更新
             _viewModel.SearchedBookTitle = book.Title;
             _viewModel.SearchedBookAuthor = book.Author;
@@ -79,6 +82,14 @@ namespace Book_Shelf.Views
             await DisplayAlert("登録完了", $"「{book.Title}」を登録しました。", "OK");
 
             // オプション: 入力初期化や画面遷移
+            _viewModel.Isbin = string.Empty;
+            _viewModel.InDisplaySearchResult = false;
+        }
+
+        private async void OnUnregisterClicked(object sender, EventArgs e)
+        {
+            await _viewModel.UnregisterBook(_viewModel.Isbin);
+            await DisplayAlert("登録解除", $"「{_viewModel.SearchedBookTitle}」の登録を解除しました。", "OK");
             _viewModel.Isbin = string.Empty;
             _viewModel.InDisplaySearchResult = false;
         }
