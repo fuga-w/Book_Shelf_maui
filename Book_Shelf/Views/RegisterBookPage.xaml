@@ -22,6 +22,7 @@
                              Padding="5">
                             <Entry x:Name="IsbinEntry"
                                    Placeholder="例: 9781234567890"
+                                   Text="{Binding Isbin}"
                                    Keyboard="Numeric"
                                    TextChanged="OnIsbinChanged"/>
                      </Border>

@@ -11,6 +11,7 @@ public class RegisterBookPageViewModel : ObservableObject
     private string _searchedBookAuthor = string.Empty;
     private string _searchedBookCoverImage = string.Empty;
     private bool _inDisplaySearchResult = false;
+    private string _isbin = string.Empty;
 
     public string SearchedBookTitle
     {
@@ -48,6 +49,16 @@ public class RegisterBookPageViewModel : ObservableObject
         set
         {
             _inDisplaySearchResult = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string Isbin
+    {
+        get => _isbin;
+        set
+        {
+            _isbin = value;
             OnPropertyChanged();
         }
     }

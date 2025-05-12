@@ -15,25 +15,36 @@ namespace Book_Shelf.Views
         }
         private async void OnSearchClicked(object sender, EventArgs e)
         {
-            var isbin = IsbinEntry.Text?.Trim();
+            var isbinInput = _viewModel.Isbin;
+            var isbin = Isbin.TryCreate(isbinInput);
 
-            if (string.IsNullOrEmpty(isbin) || !IsValidIsbin(isbin))
+            if (!isbin.IsValid)
             {
                 IsbinBorder.Stroke = Colors.Red;
                 ErrorLabel.Text = "ISBINが空か、形式が正しくありません。";
                 ErrorLabel.IsVisible = true;
-                ResultCard.IsVisible = false;
+                _viewModel.InDisplaySearchResult = false;
                 return;
             }
 
             IsbinBorder.Stroke = Colors.Gray;
             ErrorLabel.IsVisible = false;
 
-            book = await _viewModel.LookupBookByIsbin(isbin);
+            var isbinValue = isbin.Value?.Value.ToString();
+            if (string.IsNullOrEmpty(isbinValue))
+            {
+                IsbinBorder.Stroke = Colors.Red;
+                ErrorLabel.Text = "ISBINが空か、形式が正しくありません。";
+                ErrorLabel.IsVisible = true;
+                _viewModel.InDisplaySearchResult = false;
+                return;
+            }
+
+            book = await _viewModel.LookupBookByIsbin(isbinValue);
 
             if (book == null)
             {
-                DisplayAlert("検索失敗", "書籍が見つかりませんでした。", "OK");
+                await DisplayAlert("検索失敗", "書籍が見つかりませんでした。", "OK");
                 ResultCard.IsVisible = false;
                 return;
             }
@@ -50,11 +61,8 @@ namespace Book_Shelf.Views
             IsbinBorder.Stroke = Colors.Gray;
             ErrorLabel.IsVisible = false;
             _viewModel.InDisplaySearchResult = false;
-        }
 
-        private bool IsValidIsbin(string isbin)
-        {
-            return Regex.IsMatch(isbin, @"^\d{13}$");
+            _viewModel.Isbin = e.NewTextValue?.Trim() ?? string.Empty;
         }
 
         private async void OnRegisterClicked(object sender, EventArgs e)
@@ -64,15 +72,15 @@ namespace Book_Shelf.Views
                 Title = _viewModel.SearchedBookTitle,
                 Author = _viewModel.SearchedBookAuthor,
                 CoverImage = _viewModel.SearchedBookCoverImage,
-                Isbn = book?.Isbn,
+                Isbn = _viewModel.Isbin,
             });
 
             // ここでは例としてメッセージ表示
-            DisplayAlert("登録完了", $"「{book.Title}」を登録しました。", "OK");
+            await DisplayAlert("登録完了", $"「{book.Title}」を登録しました。", "OK");
 
             // オプション: 入力初期化や画面遷移
-            IsbinEntry.Text = "";
-            ResultCard.IsVisible = false;
+            _viewModel.Isbin = string.Empty;
+            _viewModel.InDisplaySearchResult = false;
         }
     }
 }
